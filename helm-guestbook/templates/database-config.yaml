@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: my-job
+  annotation:
+    argocd.argoproj.io/sync-wave: "11"
+spec:
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      restartPolicy: Never
+      containers:
+      - image: busybox
+        name: my-job      
+        command:
+        - "sh"
+        - "-c"
+        - "echo 'Setting up DB on host $(DBHOST)...';sleep 10;echo 'Completed!'"
+        env:
+          - name: DBHOST
+            valueFrom:
+              configMapKeyRef:
+                name: db-config
+                key: db_host
+
