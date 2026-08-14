@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: presync-job
+spec:
+  backoffLimit: 6
+  template:
+    spec:
+      containers:
+      - command:
+        - 'sh'
+        - '-c'
+        - "echo 'Migration in progress...'; sleep 10; echo 'Done!'"
+        image: busybox
+        name: migration-job
