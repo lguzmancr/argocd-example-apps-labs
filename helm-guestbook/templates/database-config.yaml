@@ -12,7 +12,7 @@ spec:
       restartPolicy: Never
       containers:
       - image: busybox
-        name: my-job      
+        name: db-config      
         command:
         - "sh"
         - "-c"
